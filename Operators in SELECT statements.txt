@@ -1,0 +1,137 @@
+Write out a generic SELECT statement.
+SELECT column2
+FROM table 2
+WHERE column2 < value
+AND column2 > value2;
+
+Create a fun way to remember the order of operations in a SELECT statement, such as a mnemonic.
+I will use one that I found instead since I feel this one is cleverer
+SWEATY FEET WILL GIVE HORRIBLE ODORS. SELECT FROM WHERE GROUPBY HAVING ORDERBY
+Given this dogs table, write queries to select the following pieces of data:
+
+Intake teams typically guess the breed of shelter dogs, so the breed column may have multiple words (for example, "Labrador Collie mix").
+
+Display the name, gender, and age of all dogs that are part Labrador.
+SELECT name, gender, age
+FROM dogs
+WHERE breed LIKE '%labrador%';
+
+Display the ids of all dogs that are under 1 year old.
+SELECT id
+FROM dogs
+WHERE age < 1;
+
+Display the name and age of all dogs that are female and over 35lbs.
+SELECT name, age
+FROM dogs
+WHERE gender LIKE '%F%'
+AND weight > 35;
+
+Display all of the information about all dogs that are not Shepherd mixes.
+SELECT * 
+FROM dogs
+WHERE breed NOT LIKE '%shepherd%';
+
+Display the id, age, weight, and breed of all dogs that are either over 60lbs or Great Danes.
+SELECT id, weight, breed
+WHERE weight < 60
+OR breed LIKE '%Great Danes%';
+
+Given this cats table, what records are returned from these queries?
+
+SELECT name, adoption_date FROM cats;
+SELECT name, age FROM cats;
+
+**Query #1**
+
+    SELECT name, adoption_date FROM cats;
+
+| name     | adoption_date            |
+| -------- | ------------------------ |
+| Mushi    | 2016-03-22T00:00:00.000Z |
+| Seashell |                          |
+| Azul     | 2016-04-17T00:00:00.000Z |
+| Victoire | 2016-09-01T00:00:00.000Z |
+| Nala     |                          |
+
+---
+**Query #2**
+
+    SELECT name, age FROM cats;
+
+| name     | age |
+| -------- | --- |
+| Mushi    | 1   |
+| Seashell | 7   |
+| Azul     | 3   |
+| Victoire | 7   |
+| Nala     | 1   |
+
+---
+
+
+From the cats table, write queries to select the following pieces of data.
+
+Display all the information about all of the available cats.
+
+SELECT * FROM cats;
+
+Display the name and sex of all cats who are 7 years old.
+
+SELECT name, sex
+FROM cats
+WHERE age = 7;
+
+Find all of the names of the cats, so you don’t choose duplicate names for new cats.
+
+SELECT name
+FROM cats;
+
+List each comparison operator and explain when you would use it. Include a real world example for each.
+If you can’t list these from memory, do these flashcards until you can!
+
+> Greater Than -> We might use this to see which student earned a higher grade.
+< Less Than -> Can be used to check who played for a lower golf score.
+= Equal To -> Checks if two values are equal, can be used for checking if a patient maintained their weight between checkups.
+<= Less Than or Equal To -> We can test to see if that same patient is able to run a mile in either less or same amount of time as before.
+>= Great Than or Equal To -> Check if that student met the minimum passing score.
+!= Not equal to -> Check if a value is different, we might use this to see our weekly grocery list has some changes so we might have to review it instead of going by memory.
+<> Greater Than or Less Than -> See if the value doesn't fall within a range. Such as in the case of determining if that student is wildly outside of our 3 standard deviations on a test score. 
+From the cats table, what data is returned from these queries?
+SELECT name FROM cats WHERE gender = ‘F’;
+SELECT name FROM cats WHERE age <> 3;
+SELECT ID FROM cats WHERE name != ‘Mushi’ AND gender = ‘M’;
+
+
+SELECT name FROM cats WHERE gender = 'F';
+
+| name     |
+| -------- |
+| Seashell |
+| Nala     |
+
+---
+**Query #2**
+
+    SELECT name FROM cats WHERE age <> 3;
+
+| name     |
+| -------- |
+| Mushi    |
+| Seashell |
+| Victoire |
+| Nala     |
+
+---
+**Query #3**
+
+    SELECT ID FROM cats WHERE name != 'Mushi' AND gender = 'M';
+
+| id  |
+| --- |
+| 3   |
+| 4   |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/55ePhx9NLn7PzdGnebFaG7/0)
