@@ -1,27 +1,31 @@
-List the commands for adding, updating, and deleting data.
-Adding: INSERT INTO table (col1, col2, col3),(val1, val2, val3),(val1.1, val2.1, val3.1);
+1.List the commands for adding, updating, and deleting data.
+Adding: INSERT INTO table VALUES (col1, col2, col3),(val1, val2, val3),(val1.1, val2.1, val3.1);
 Updating: UPDATE table SET col1=newval WHERE id = 123;
 Deleting: DELETE FROM table WHERE id = 123;
 
-Explain the structure for each type of command.
+2.Explain the structure for each type of command.
 1. I specify command (insert) then state which table i want to insert into. Then I select which columns I want values added under, then those values.
 2. I specify command (update) then state which table, then which column to SET the new value into, then how to select which row I want to change a value of. 
 3. I specify command (delete) then state which table, then which row associated with value. 
 
-What are some of the data types that can be used in tables? Give a real-world example of each type.
+3.What are some of the data types that can be used in tables? Give a real-world example of each type.
 Numbers-> integer - what a users phone number is.
-Text -> what a users name is
+Text -> what a users name is.
 Date and Time -> NOT TIMESTAMP - you would actually want time.
 
-Decide how to create a new table to hold a list of people invited to a wedding dinner. The table needs to have first and last names, whether they sent in their RSVP, the number of guests they are bringing, and the number of meals (1 for adults and 1/2 for children).
+4.Decide how to create a new table to hold a list of people invited to a wedding dinner. The table needs to have first and last names, whether they sent in their RSVP, the number of guests they are bringing, and the number of meals (1 for adults and 1/2 for children).
+If database has already been created, we can use:
+CREATE TABLE wedding_dinner(name varchar, RSVP boolean, number_of_guests integer, number_of_meals float) VALUES ('Larry Watterbean', False, 4, 3.5);
+If name is meant to be 2 separate fields, we would instead have name as:
+CREATE TABLE wedding_dinner(first_name varchar, last_name varchar...) VALUES ('Larry', 'Watterbean'...);
 
-Which data type would you use to store each of the following pieces of information?
-First and last name: Text
+5.Which data type would you use to store each of the following pieces of information?
+First and last name: Text/Varchar (as varchar supposedly uses memory in a more efficient manner)
 Whether they sent in their RSVP: Boolean
 Number of guests: Integer
-Number of meals: Integer
+Number of meals: Integer/Float (if fractional, use float like in the above example for child meal counter)
 Write a command that creates the table to track the wedding dinner.
-CREATE TABLE dinners(name text, rsvp boolean, number_of_guests integer, number_of_meals integer)
+CREATE TABLE dinners(name varchar, rsvp boolean, number_of_guests integer, number_of_meals integer)
 Write a command that adds a column to track whether the guest sent a thank you card.
 ALTER TABLE dinners ADD COLUMN thank_you boolean;
 You have decided to move the data about the meals to another table, so write a command to remove the column storing the number meals from the wedding table.
@@ -32,22 +36,50 @@ The wedding is over and we do not need to keep this information, so write a comm
 ALTER TABLE dinner DROP COLUMN table_number;
 Write a command to create a new table to hold the books in a library with the columns ISBN, title, author, genre, publishing date, number of copies, and available copies.
 
-** For the following questions, I did these through the powershell command line. I have taken photos of them to help confirm that I have done this. I will upload this to github and provide link here**
-
-https://github.com/donovanky/Databases-Module/pull/18/commits/66f56c07a86fee3ab86518101b6ce88d184ce312
-
-P.S. I will be trying to remember to use git bash in the future instead of powershell. 
+CREATE TABLE library(ISBN text, title text, author text, genre text, published text, total integer, available integer)
+We might use varchar rather than text, or perhaps integer if we want date as a year or possibly date if we wanted the full field of the date published (dd/mm/yyyy or a derivative).
 
 Find three books and add their information to the table.
+INSERT INTO books (isbn, title, author, genre, published, total, available) VALUES ('978-0-307-59293-4','DarkMarket', 'Misha Glenny', 'Crime', 2011, 5, 5) ('978-1-4391-9949-7', 'Adversity Advantage', 'Paul G. Stoltz', 'Self-help', 2010, 4, 4)('978-1-4221-6', 'Conscious Capitalism', 'John Mackey', 'Business', 2013, 6, 6) ('978-1-4221-6', 'Conscious Capitalism', 'John Mackey', 'Business', 2013, 6, 6) ;
+
 Someone has just checked out one of the books. Change the number of available copies to 1 fewer.
+
+UPDATE books SET available=5 WHERE title = 'Conscious Capitalism';
+
 Now one of the books has been added to the banned books list. Remove it from the table.
+
+DELETE FROM books WHERE title = DarkMarket;
+
 Write a command to make a new table to hold spacecrafts. Information should include id, name, year launched, country of origin, a brief description of the mission, orbiting body, if it is currently operating, and its approximate miles from Earth. In addition to the table creation, provide commands that perform the following operations:
 
+CREATE TABLE spacecrafts(id text, name text, launched integer, country text, objective text, orbiting text, operating boolean, distance integer);
+
 Add three non-Earth-orbiting satellites to the table.
+
+INSERT INTO spacecrafts (id, name, launched, country, objective, orbiting, operating, distance) VALUES ('1962-055A', 'Ranger 5', 1962, 'USA', 'Land Lunar Seismometer', 'none', FALSE, 724),('2018-065A', 'Parker Solar Probe', 2018, 'USA', 'Probing Sun Corona', 'Sun', TRUE, 40,000,000);
+
 Remove one of the satellites from the table since it has just crashed into the planet.
+
+DELETE FROM spacecrafts WHERE id = '1962-055A';
+
 Edit another satellite because it is no longer operating and change the value to reflect that.
+
+UPDATE books SET operating = FALSE WHERE id = '2018-065A';
+
 Write a command to create a new table to hold the emails in your inbox. This table should include an id, the subject line, the sender, any additional recipients, the body of the email, the timestamp, whether or not you have read the email, and the id of the email chain it's in. Also provide commands that perform the following operations:
 
+CREATE TABLE inbox_emails(id integer, subject text, sender text, subrecipient text, body text, timestamp text, read boolean, chainid integer);
+
 Add three new emails to the inbox.
+
+INSERT INTO emails VALUES (123, 'First Look', 'hello@the5th.com', 'none', 'The Story of Bilbao', '6:07 5/31/2019', FALSE, 678)
+(796315, 'Last Chance', 'spammy@store.com', 'none', 'Buy our trinket', '5:18 5/29/2019', FALSE, 19785)
+(4, 'Donate to Alumni', 'solicitations@university.edu', 'none', 'Every year we waste all of our funding', '3:58 1/1/2019', TRUE, 5);
+
+
 You deleted one of the emails, so write a command to remove the row from the inbox table.
+
+DELETE FROM emails WHERE id = 123;
 You started reading an email but just heard a crash in another room. Mark the email as unread before investigating the crash, so you can come back and read it later.
+
+UPDATE emails SET read=false WHERE id = 4;
