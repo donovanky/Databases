@@ -80,6 +80,40 @@ SELECT email, signup
 FROM users
 WHERE name = 'DeAndre Data'
 
+**Schema (PostgreSQL v9.6)**
+
+    CREATE TABLE users(
+      "userid" INTEGER,
+      "name"   VARCHAR(32),
+      "email"  VARCHAR(64),
+      "signup" DATE
+    );
+        
+    INSERT INTO users
+        ("userid", "name",              "email",                        "signup")
+    VALUES
+        ( 1,       'Aleesia Algorithm', 'aleesia.algorithm@uw.edu',     '2014-10-24'),
+        ( 2,       'DeAndre Data',      'datad@comcast.net',            '2008-01-20'),
+        ( 3,       'Chris Collection',  'chris.collection@outlook.com', '2012-01-20'),
+        ( 4,       'Brandy Boolean',    'bboolean@nasa.gov',            '1999-10-15');
+    
+
+---
+
+**Query #1**
+
+    SELECT email, signup 
+    FROM users 
+    WHERE name = 'DeAndre Data';
+
+| email             | signup                   |
+| ----------------- | ------------------------ |
+| datad@comcast.net | 2008-01-20T00:00:00.000Z |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/iQAEYktwysXqcLQHv2dwbc/0)
+
 Q:The user ID for the user with email 'aleesia.algorithm@uw.edu'.
 
 A:
@@ -87,8 +121,77 @@ SELECT userid
 FROM users
 WHERE email = 'aleesia.algorithm@uw.edu'
 
+**Schema (PostgreSQL v9.6)**
+
+    CREATE TABLE users(
+      "userid" INTEGER,
+      "name"   VARCHAR(32),
+      "email"  VARCHAR(64),
+      "signup" DATE
+    );
+        
+    INSERT INTO users
+        ("userid", "name",              "email",                        "signup")
+    VALUES
+        ( 1,       'Aleesia Algorithm', 'aleesia.algorithm@uw.edu',     '2014-10-24'),
+        ( 2,       'DeAndre Data',      'datad@comcast.net',            '2008-01-20'),
+        ( 3,       'Chris Collection',  'chris.collection@outlook.com', '2012-01-20'),
+        ( 4,       'Brandy Boolean',    'bboolean@nasa.gov',            '1999-10-15');
+    
+
+---
+
+**Query #1**
+
+    SELECT userid
+    FROM users
+    WHERE email = 'aleesia.algorithm@uw.edu';
+
+| userid |
+| ------ |
+| 1      |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/iQAEYktwysXqcLQHv2dwbc/0)
+
 Q:All the columns for the user ID equal to 4.
 A:
 SELECT *
 FROM users
-WHERE userid = 4
+WHERE userid = 4;
+
+**Schema (PostgreSQL v9.6)**
+
+    CREATE TABLE users(
+      "userid" INTEGER,
+      "name"   VARCHAR(32),
+      "email"  VARCHAR(64),
+      "signup" DATE
+    );
+        
+    INSERT INTO users
+        ("userid", "name",              "email",                        "signup")
+    VALUES
+        ( 1,       'Aleesia Algorithm', 'aleesia.algorithm@uw.edu',     '2014-10-24'),
+        ( 2,       'DeAndre Data',      'datad@comcast.net',            '2008-01-20'),
+        ( 3,       'Chris Collection',  'chris.collection@outlook.com', '2012-01-20'),
+        ( 4,       'Brandy Boolean',    'bboolean@nasa.gov',            '1999-10-15');
+    
+
+---
+
+**Query #1**
+
+    SELECT * 
+    FROM users
+    WHERE userid = 4;
+
+| userid | name           | email             | signup                   |
+| ------ | -------------- | ----------------- | ------------------------ |
+| 4      | Brandy Boolean | bboolean@nasa.gov | 1999-10-15T00:00:00.000Z |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/iQAEYktwysXqcLQHv2dwbc/0)
+
